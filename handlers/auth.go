@@ -28,13 +28,6 @@ func HandlerAuth(AuthRepository repositories.AuthRepository) *handlerAuth {
 func (h *handlerAuth) Register(w http.ResponseWriter, r *http.Request) {
   w.Header().Set("Content-Type", "application/json")
 
-	// dataContex := r.Context().Value("dataFile") // add this code
-	// filepath := dataContex.(string)
-  // request := authdto.RegisterRequest{
-	// 	Fullname:  r.FormValue("fullname"),
-	// 	Email: r.FormValue("email"),
-	// 	Password: r.FormValue("password"),
-	// }
 	
 	request := new(authdto.RegisterRequest)
   if err := json.NewDecoder(r.Body).Decode(&request); err != nil {

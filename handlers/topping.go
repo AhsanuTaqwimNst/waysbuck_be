@@ -24,9 +24,6 @@ type handlerTopping struct {
 	ToppingRepository repositories.ToppingRepository
 }
 
-// Create `path_file` Global variable here ...
-// var path_file = os.Getenv("PATH_FILE")
-
 func HandlerTopping(ToppingRepository repositories.ToppingRepository) *handlerTopping {
 	return &handlerTopping{ToppingRepository}
 }
@@ -92,9 +89,6 @@ func (h *handlerTopping) CreateTopping(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(response)
 		return
 	}
-	// get data user token
-	// userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
-	// userId := int(userInfo["id"].(float64))
 
 	// Get dataFile from midleware and store to filepath variable here ...
 	dataContex := r.Context().Value("dataFile") // add this code
@@ -109,7 +103,7 @@ func (h *handlerTopping) CreateTopping(w http.ResponseWriter, r *http.Request) {
 	cld, _ := cloudinary.NewFromParams(CLOUD_NAME, API_KEY, API_SECRET)
 
 	// Upload file to Cloudinary ...
-	resp, err := cld.Upload.Upload(ctx, filepath, uploader.UploadParams{Folder: "Waysbuck"});
+	resp, err := cld.Upload.Upload(ctx, filepath, uploader.UploadParams{Folder: "ways_buks"});
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -185,7 +179,7 @@ func (h *handlerTopping) UpdateTopping(w http.ResponseWriter, r *http.Request) {
 	cld, _ := cloudinary.NewFromParams(CLOUD_NAME, API_KEY, API_SECRET)
 
 	// Upload file to Cloudinary ...
-	resp, err := cld.Upload.Upload(ctx, filepath, uploader.UploadParams{Folder: "dumbmerch"});
+	resp, err := cld.Upload.Upload(ctx, filepath, uploader.UploadParams{Folder: "ways_buks"});
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -282,12 +276,3 @@ func (h *handlerTopping) DeleteTopping(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-// func convertResponseTopping(u models.Topping) toppingdto.ToppingResponse {
-// 	return toppingdto.ToppingResponse{
-// 		ID: 			u.ID,
-// 		Title: u.Title,
-// 		Price: u.Price,
-// 		Image: u.Image,
-// 		Qty: u.Qty,
-// 	}
-// }

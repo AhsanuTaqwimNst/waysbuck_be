@@ -51,8 +51,7 @@ func (h *handlerOrder) AddOrder(w http.ResponseWriter, r *http.Request) {
 
 	transaction, err := h.OrderRepository.GetTransactionID(request.BuyerID)
 
-	// userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
-	// buyerID := int(userInfo["id"].(float64))
+	
 
 	product, err := h.OrderRepository.GetProductOrder(request.ProductID)
 
@@ -89,13 +88,7 @@ func (h *handlerOrder) AddOrder(w http.ResponseWriter, r *http.Request) {
 		CreateAt: time.Now(),
 	}
 
-	// dataOrder := models.Order{
-	// 	Qty:       	1,
-	// 	BuyerID:  	buyerID,
-	// 	ProductID: 	product.ID,
-	// 	Topping:    toppings,
-	// 	Total:     	Total,
-	// }
+
 
 	order, err := h.OrderRepository.AddOrder(dataOrder)
 
@@ -206,10 +199,6 @@ func (h *handlerOrder) UpdateOrder(w http.ResponseWriter, r *http.Request) {
     return
   }
 
-	// qty, _ := strconv.Atoi(r.FormValue("qty"))
-	// request := orderdto.UpdateOrder {
-	// 	Qty:       qty,
-	// }
 
 	order, _ := h.OrderRepository.GetOrder(id)
 

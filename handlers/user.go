@@ -82,14 +82,6 @@ func (h *handlerUser) GetUser(w http.ResponseWriter, r *http.Request) {
 func (h *handlerUser) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	// request := new(usersdto.UpdateUser)
-	// if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-	// 	w.WriteHeader(http.StatusBadRequest)
-	// 	response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
-	// 	json.NewEncoder(w).Encode(response)
-	// 	return
-	// }
-
 	
 	userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
 	userID := int(userInfo["id"].(float64))
@@ -107,7 +99,7 @@ func (h *handlerUser) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	cld, _ := cloudinary.NewFromParams(CLOUD_NAME, API_KEY, API_SECRET)
 
 	// Upload file to Cloudinary ...
-	resp, err := cld.Upload.Upload(ctx, filepath, uploader.UploadParams{Folder: "Waysbuck"});
+	resp, err := cld.Upload.Upload(ctx, filepath, uploader.UploadParams{Folder: "ways_buks"});
 
 	if err != nil {
 		fmt.Println(err.Error())

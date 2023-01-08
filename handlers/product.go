@@ -24,8 +24,6 @@ type handlerProduct struct {
 	ProductRepository repositories.ProductRepository
 }
 
-// Create `path_file` Global variable here ...
-// var path_file = os.Getenv("PATH_FILE")
 
 func HandlerProduct(ProductRepository repositories.ProductRepository) *handlerProduct {
 	return &handlerProduct{ProductRepository}
@@ -107,7 +105,7 @@ func (h *handlerProduct) CreateProduct(w http.ResponseWriter, r *http.Request) {
 	cld, _ := cloudinary.NewFromParams(CLOUD_NAME, API_KEY, API_SECRET)
 
 	// Upload file to Cloudinary ...
-	resp, err := cld.Upload.Upload(ctx, filepath, uploader.UploadParams{Folder: "Waysbuck"})
+	resp, err := cld.Upload.Upload(ctx, filepath, uploader.UploadParams{Folder: "ways_buks"})
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -181,7 +179,7 @@ func (h *handlerProduct) UpdateProduct(w http.ResponseWriter, r *http.Request) {
 	cld, _ := cloudinary.NewFromParams(CLOUD_NAME, API_KEY, API_SECRET)
 
 	// Upload file to Cloudinary ...
-	resp, err := cld.Upload.Upload(ctx, filepath, uploader.UploadParams{Folder: "dumbmerch"})
+	resp, err := cld.Upload.Upload(ctx, filepath, uploader.UploadParams{Folder: "ways_buks"})
 
 	if err != nil {
 		fmt.Println(err.Error())
